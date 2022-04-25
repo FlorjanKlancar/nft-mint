@@ -1,8 +1,7 @@
-import { BeakerIcon, ChartPieIcon, ClipboardCheckIcon, CogIcon } from '@heroicons/react/outline'
+import { BeakerIcon, ChartPieIcon, ClipboardCheckIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { DatabaseIcon, UserGroupIcon } from '@heroicons/react/solid'
 
 function Menu() {
   const router = useRouter()

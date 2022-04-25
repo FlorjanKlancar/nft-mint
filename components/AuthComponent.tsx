@@ -15,7 +15,7 @@ export default function AuthComponent() {
       <div className="flex flex-col items-center justify-center space-y-4 bg-gradient-to-br from-indigo-900 via-indigo-500 to-rose-500 p-5 md:space-y-8 ">
         <div>
           <h1 className="text-center text-lg font-bold text-gray-300 transition-all duration-300 hover:text-white md:text-4xl">
-            Welcome to NFT Link
+            Welcome to NFT Mint
           </h1>
           <h3 className=" text-center text-xs text-gray-400 transition-all duration-300 hover:text-white">
             Sign in to continue to Dashboard

@@ -11,61 +11,61 @@ export const config = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(req.method)
   switch (req.method) {
     default:
-    case 'POST': {
-      const form = new formidable.IncomingForm()
-      try {
-        const user = await supabaseServerClient.auth.api.getUser(req.headers.authorization.slice(7))
+    case 'POST':
+      {
+        const form = new formidable.IncomingForm()
+        try {
+          const user = await supabaseServerClient.auth.api.getUser(
+            req.headers.authorization.slice(7)
+          )
 
-        form.parse(req, async function (err, fields, files) {
-          if (fields.json) {
-            const json = JSON.parse(fields.json)
-            const pinataFile = await pinata.pinJSONToIPFS(json)
-            const supabaseResult = await supabaseServerClient.from('files').insert({
-              id: pinataFile.IpfsHash,
-              user: user.user.id,
-              size: pinataFile.PinSize,
-              type: 'application/json',
-              name: json.title
-            })
-            return res.status(201).send(supabaseResult)
-          }
-          if (files.file) {
-            const pinataFile = await pinata.pinFromFS(files.file?.filepath)
+          form.parse(req, async function (err, fields, files) {
+            if (fields.json) {
+              const json = JSON.parse(fields.json)
+              const pinataFile = await pinata.pinJSONToIPFS(json)
+              const supabaseResult = await supabaseServerClient.from('files').insert({
+                id: pinataFile.IpfsHash,
+                user: user.user.id,
+                size: pinataFile.PinSize,
+                type: 'application/json',
+                name: json.title
+              })
+              return res.status(201).send(supabaseResult)
+            }
+            if (files.file) {
+              const pinataFile = await pinata.pinFromFS(files.file?.filepath)
 
-            const supabaseResult = await supabaseServerClient.from('files').insert({
-              id: pinataFile.IpfsHash,
-              user: user.user.id,
-              size: pinataFile.PinSize,
-              type: files.file.mimetype,
-              name: files.file.originalFilename
-            })
+              const supabaseResult = await supabaseServerClient.from('files').insert({
+                id: pinataFile.IpfsHash,
+                user: user.user.id,
+                size: pinataFile.PinSize,
+                type: files.file.mimetype,
+                name: files.file.originalFilename
+              })
 
-            return res.status(201).json({ supabaseResult, pinataFile })
-          }
-        })
-      } catch (e) {
-        console.log(e)
-        return res.status(500).send(e)
+              console.log('supabaseResult', supabaseResult, pinataFile)
+
+              return res.status(201).json({ supabaseResult, pinataFile })
+            }
+          })
+        } catch (e) {
+          console.log(e)
+          return res.status(500).send(e)
+        }
       }
-    }
-    case 'GET': {
-      const { userId } = req.query
+      break
+    case 'GET':
+      {
+        const { userId } = req.query
 
-      console.log('id:', userId)
-      const files = await supabaseServerClient.from('files').select('*').match({ user: userId })
+        const files = await supabaseServerClient.from('files').select('*').match({ user: userId })
 
-      console.log('files', files.data)
-      const filter = {
-        hashContains: 'QmcivvpZtz3tKqhBKCrCx4DAX4CWZKnkwBUhTsZLu6NPNo'
+        if (files) {
+          res.status(200).json(files)
+        }
       }
-      const response = await pinata.pinList(filter)
-
-      if (response) {
-        res.status(200).json(response)
-      }
-    }
+      break
   }
 }

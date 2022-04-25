@@ -16,7 +16,7 @@ function NavbarLoginInfo() {
       <div className="hidden xl:block">
         <Link href={'/'} passHref>
           <div className="btn btn-ghost text-xl normal-case">
-            <span className="text-accent">NFT Link</span>
+            <span className="text-accent">NFT Mint</span>
           </div>
         </Link>
       </div>

@@ -1,20 +1,24 @@
 import React from 'react'
 import Layout from '../../components/layout/Layout'
-import StorageGrid from '../../components/storage/StorageGrid'
 import axios from 'axios'
 import { supabaseServerClient } from '../../utils/server/supabaseServer'
+import { server } from '../../config'
+import StorageTable from '../../components/storage/StorageTable'
 
-function Storage() {
+function Storage({ data }) {
   const pageTitle = (
     <h1>
       Your <span className="text-secondary underline underline-offset-2">Storage</span>
     </h1>
   )
+
   return (
     <Layout pageTitle={pageTitle}>
-      <div className="px-12">
-        <p>Here you can see all of the files that you uploaded to IPFS</p>
-        <StorageGrid />
+      <div className="flex flex-col space-y-5 px-12">
+        <p className="rounded-lg bg-info py-3 px-4 text-center text-xs text-info-content hover:opacity-75 sm:text-left sm:text-base">
+          Here you can see all of the files that you uploaded to IPFS
+        </p>
+        <StorageTable data={data.data} />
       </div>
     </Layout>
   )
@@ -27,10 +31,9 @@ export async function getServerSideProps({ req }) {
     return { props: {}, redirect: { destination: '/login' } }
   }
 
-  const result = await axios.get('http://localhost:3000/api/ipfs', { params: { userId: user.id } })
-  console.log('resultz', result.data)
-  // Pass data to the page via props
-  return { props: { msr: 'hi' } }
+  const result = await axios.get(`${server}/api/ipfs`, { params: { userId: user.id } })
+
+  return { props: { data: result.data } }
 }
 
 export default Storage

@@ -5,7 +5,7 @@ import ImagePrev from '../../../components/nft/ImagePrev'
 import CreateNFTLayout from '../../../components/layout/CreateNFTLayout'
 
 function CreateNFT() {
-  const [ipfsFiles, setIpfsFiles] = useState([])
+  const [ipfsFiles] = useState([])
   const [nftFormFields, setNftFormFields] = useState<nftModel>({
     nftTitle: '',
     nftDescription: '',
@@ -17,11 +17,11 @@ function CreateNFT() {
   const handleChange = (e) =>
     setNftFormFields((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
 
-  const getData = async () => {
+  /*   const getData = async () => {
     const response = await axios.get('/api/nft')
     setIpfsFiles(response.data.rows)
     console.log(response)
-  }
+  } */
 
   useEffect(() => {
     //getData()

@@ -8,7 +8,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useUser } from '@supabase/supabase-auth-helpers/react'
 
 type ImagePrevProps = {
-  setNftFormFields: (prevState) => void
+  setNftFormFields?: (prevState) => void
 }
 
 const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
@@ -38,8 +38,9 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
         Authorization: `Bearer ${accessToken}`
       }
     })
+
     toast.info('File uploaded to IPFS, hash: ' + result.data.pinataFile.IpfsHash)
-    console.log(result.data)
+
     setFileIpfsHash(result.data.pinataFile.IpfsHash)
   }
 
