@@ -1,6 +1,8 @@
 import React from 'react'
 import Layout from '../../components/layout/Layout'
 import StorageGrid from '../../components/storage/StorageGrid'
+import axios from 'axios'
+import { supabaseServerClient } from '../../utils/server/supabaseServer'
 
 function Storage() {
   const pageTitle = (
@@ -16,6 +18,19 @@ function Storage() {
       </div>
     </Layout>
   )
+}
+
+export async function getServerSideProps({ req }) {
+  const { user } = await supabaseServerClient.auth.api.getUserByCookie(req)
+
+  if (!user) {
+    return { props: {}, redirect: { destination: '/login' } }
+  }
+
+  const result = await axios.get('http://localhost:3000/api/ipfs', { params: { userId: user.id } })
+  console.log('resultz', result.data)
+  // Pass data to the page via props
+  return { props: { msr: 'hi' } }
 }
 
 export default Storage

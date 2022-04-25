@@ -52,8 +52,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
     case 'GET': {
+      const { userId } = req.query
+
+      console.log('id:', userId)
+      const files = await supabaseServerClient.from('files').select('*').match({ user: userId })
+
+      console.log('files', files.data)
       const filter = {
-        hashContains: 'QmWDrAa6UfDLBEzTr5aSrbJcJivqxXMu9zucYqTs5oAbYN'
+        hashContains: 'QmcivvpZtz3tKqhBKCrCx4DAX4CWZKnkwBUhTsZLu6NPNo'
       }
       const response = await pinata.pinList(filter)
 
