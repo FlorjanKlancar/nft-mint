@@ -4,8 +4,7 @@ import { ipfsURL } from '../../config'
 import { supabaseImageModel } from '../../model/supabaseImageModel'
 import { DotsVerticalIcon, PencilAltIcon, TrashIcon } from '@heroicons/react/outline'
 import { Scrollbars } from 'react-custom-scrollbars'
-import axios from 'axios'
-import { useUser } from '@supabase/supabase-auth-helpers/react'
+
 interface StorageTableProps {
   data: supabaseImageModel[]
   handleEdit: (id: string) => void

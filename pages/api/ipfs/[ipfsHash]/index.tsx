@@ -9,10 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { ipfsHash } = req.query
 
         try {
-          const { data, error } = await supabaseServerClient
-            .from('files')
-            .delete()
-            .match({ id: ipfsHash })
+          const { data } = await supabaseServerClient.from('files').delete().match({ id: ipfsHash })
 
           if (data) {
             res.status(200).send(`Deleted row ${ipfsHash}`)
