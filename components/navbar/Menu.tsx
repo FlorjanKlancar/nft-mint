@@ -32,7 +32,6 @@ function Menu() {
     if (routerPath === itemLink) return true
     else {
       const splitArray = itemLink.split('/')
-      console.log('splitArray', splitArray[1])
 
       if (splitArray[1].length) {
         if (routerPath.includes(`${splitArray[1]}/`)) return true

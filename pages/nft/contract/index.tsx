@@ -22,9 +22,7 @@ function Contract() {
           </div>
 
           <div>
-            <button className="rounded-lg bg-green-500 px-12 py-4 text-white hover:bg-green-600 dark:bg-green-700 dark:hover:bg-green-800">
-              Button
-            </button>
+            <button className="btn btn-accent w-1/2">Button</button>
           </div>
         </div>
         <div className="flex justify-center">

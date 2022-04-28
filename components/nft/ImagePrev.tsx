@@ -13,6 +13,7 @@ type ImagePrevProps = {
 
 const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
   const { accessToken } = useUser()
+  const [isLoading, setIsLoading] = useState(false)
   const [file, setFile] = useState()
   const [fileIpfsHash, setFileIpfsHash] = useState()
   const [previewUrl, setPreviewUrl] = useState<string | ArrayBuffer | null>()
@@ -31,6 +32,7 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
   }, [file])
 
   const uploadToServer = async () => {
+    setIsLoading(true)
     const body = new FormData()
     body.append('file', file)
     const result = await axios.post('/api/ipfs', body, {
@@ -38,6 +40,7 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
         Authorization: `Bearer ${accessToken}`
       }
     })
+    setIsLoading(false)
 
     toast.info('File uploaded to IPFS, hash: ' + result.data.pinataFile.IpfsHash)
 
@@ -80,7 +83,7 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
               layout={'fill'}
               src={previewUrl ? previewUrl.toString() : undefined}
               alt="Preview"
-              className="h-[415px] rounded-lg"
+              className="h-[415px] max-w-sm rounded-lg"
             />
           ) : (
             <div className="flex w-full flex-col items-center justify-center">
@@ -92,10 +95,14 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
         </div>
       </div>
       {previewUrl && !fileIpfsHash && (
-        <label className={'btn btn-secondary'} onClick={() => uploadToServer()}>
+        <button
+          className={'btn btn-secondary'}
+          onClick={() => uploadToServer()}
+          disabled={isLoading ? true : false}
+        >
           <PhotographIcon className="mr-2 h-6 w-6" />
-          Upload to ipfs
-        </label>
+          {!isLoading ? 'Upload to ipfs' : 'Uploading file to IPFS'}
+        </button>
       )}
       {previewUrl && fileIpfsHash && (
         <CopyToClipboard text={fileIpfsHash}>

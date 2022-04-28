@@ -8,8 +8,6 @@ interface ReactTableProps {
 }
 
 function ReactTable({ data: ReactTableData }: ReactTableProps) {
-  console.log('ReactTableData', ReactTableData)
-
   const data = useMemo(
     () =>
       ReactTableData.map((item) => ({

@@ -90,7 +90,7 @@ function Info() {
               <button
                 className={`rounded-lg ${
                   colors[nft.color].background
-                } bg-primary/60 py-2 px-12 text-white hover:bg-primary md:px-24`}
+                }  py-2 px-12 text-white hover:bg-primary md:px-24`}
               >
                 {nft.buttonText}
               </button>

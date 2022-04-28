@@ -45,8 +45,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 name: files.file.originalFilename
               })
 
-              console.log('supabaseResult', supabaseResult, pinataFile)
-
               return res.status(201).json({ supabaseResult, pinataFile })
             }
           })
