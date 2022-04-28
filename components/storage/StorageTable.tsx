@@ -7,11 +7,15 @@ import { Scrollbars } from 'react-custom-scrollbars'
 
 interface StorageTableProps {
   data: supabaseImageModel[]
-  handleEdit: (id: string) => void
-  handleDelete: (id: string) => void
+  editHandler: (id: string) => void
+  deleteHandler: (id: string) => void
 }
 
-function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
+function StorageTable({
+  data,
+  deleteHandler: handleDelete,
+  editHandler: handleEdit
+}: StorageTableProps) {
   return (
     <div className="w-full overflow-x-auto ">
       <div className="z-50 rounded-xl border-2 border-base-200">
@@ -22,7 +26,7 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
                 <th>Pinata path</th>
                 <th>File name</th>
                 <th>Size</th>
-                <th>Type</th>
+
                 <th></th>
               </tr>
             </thead>
@@ -37,12 +41,13 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
                             <Image
                               src={`${ipfsURL}/${item.id}`}
                               alt="Avatar"
-                              className=""
                               layout="fill"
+                              placeholder="blur"
+                              blurDataURL="/placeholder.webp"
                             />
                           </div>
                         </div>
-                        <div>
+                        <div className="tooltip tooltip-bottom" data-tip="Click to open in new tab">
                           <span className="badge badge-ghost hover:opacity-75">
                             <a
                               className="link link-accent"
@@ -57,8 +62,15 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
                       </div>
                     </td>
                     <td>{item.name}</td>
-                    <td>{item.size}</td>
-                    <td>{item.type}</td>
+                    <td>
+                      <div className="flex flex-col items-center">
+                        <div>{(item.size / 1000).toFixed(2)}KB</div>
+                        <div className="badge badge-secondary badge-outline text-xs">
+                          {item.type}
+                        </div>
+                      </div>
+                    </td>
+
                     <th>
                       <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost">
@@ -69,16 +81,20 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
                           className="dropdown-content menu rounded-box w-52 border-2 border-base-200 bg-base-100 p-2 shadow"
                         >
                           <li onClick={() => handleEdit(item.id)}>
-                            <div>
-                              <PencilAltIcon className="h-5 w-5" />
-                              <span>Edit item</span>
-                            </div>
+                            <label htmlFor="my-modal-4">
+                              <div className="flex space-x-3">
+                                <PencilAltIcon className="h-5 w-5" />
+                                <label htmlFor="my-modal-4">Edit item</label>
+                              </div>
+                            </label>
                           </li>
                           <li onClick={() => handleDelete(item.id)}>
-                            <div>
-                              <TrashIcon className="h-5 w-5" />
-                              <span>Delete item</span>
-                            </div>
+                            <label>
+                              <div className="flex space-x-3 text-red-500">
+                                <TrashIcon className="h-5 w-5 " />
+                                <span>Delete item</span>
+                              </div>
+                            </label>
                           </li>
                         </ul>
                       </div>
@@ -93,7 +109,7 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
             </tbody>
             <tfoot className="sticky bottom-0">
               <tr>
-                <th colSpan={5} className="">
+                <th colSpan={5} className="text-left 2xl:text-right">
                   Uploaded files count: {data.length}
                 </th>
               </tr>
@@ -101,6 +117,17 @@ function StorageTable({ data, handleDelete, handleEdit }: StorageTableProps) {
           </table>
         </Scrollbars>
       </div>
+
+      <input type="checkbox" id="my-modal-4" className="modal-toggle" />
+      <label htmlFor="my-modal-4" className="modal modal-bottom cursor-pointer md:modal-middle">
+        <label className="modal-box relative" htmlFor="">
+          <h3 className="text-lg font-bold">Edit file {}</h3>
+          <p className="py-4">
+            You've been selected for a chance to get one year of subscription to use Wikipedia for
+            free!
+          </p>
+        </label>
+      </label>
     </div>
   )
 }

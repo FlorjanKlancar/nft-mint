@@ -17,7 +17,7 @@ function Storage({ data }) {
     </h1>
   )
 
-  const handleDelete = async (ipfsHash: string) => {
+  const deleteHandler = async (ipfsHash: string) => {
     setFiles((prevState) => prevState.filter((file) => file.id !== ipfsHash))
 
     const result = await axios.delete(`/api/ipfs/${ipfsHash}`, {
@@ -30,7 +30,7 @@ function Storage({ data }) {
     }
   }
 
-  const handleEdit = async (ipfsHash: string) => {
+  const editHandler = async (ipfsHash: string) => {
     console.log('edit', ipfsHash)
   }
 
@@ -40,7 +40,7 @@ function Storage({ data }) {
         <p className="rounded-lg bg-info py-3 px-4 text-center text-xs text-info-content hover:opacity-75 sm:text-left sm:text-base">
           Here you can see all of the files that you uploaded to IPFS
         </p>
-        <StorageTable data={files} handleDelete={handleDelete} handleEdit={handleEdit} />
+        <StorageTable data={files} deleteHandler={deleteHandler} editHandler={editHandler} />
       </div>
     </Layout>
   )
