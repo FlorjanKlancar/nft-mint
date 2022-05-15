@@ -1,37 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div id="top"></div>
 
-## Getting Started
+<h3 align="center">NFT Mint</h3>
+  <p align="center">
+    This app is demo application for minting NFTs build with Supabase backend.
+ 
+  </p>
+</div>
 
-First, run the development server:
+<h3>Vercel Deploy: https://nft-mint-sigma.vercel.app/</h3>
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+![nftMint_1](https://user-images.githubusercontent.com/48727773/168477610-d00351b1-cee5-4210-9814-0d63f35033b1.png)
+![nftMint_2](https://user-images.githubusercontent.com/48727773/168477608-bc515dfb-d0a8-40bd-b495-e42ca15c70d0.png)
+![nftMint_3](https://user-images.githubusercontent.com/48727773/168477606-ce8e54b9-0b4a-4469-951e-087ddc145b30.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#information">Information</a></li>
+  </ol>
+</details>
 
 
-https://uppy.io/docs/
+
+
+### Built With
+
+* [Next.js](https://nextjs.org/)
+* [React.js](https://reactjs.org/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Supabase](https://supabase.com/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [DaisyUI](https://daisyui.com/)
+* [Redux Toolkit](https://redux-toolkit.js.org/)
+* [Pinata](https://www.pinata.cloud/)
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+
+
+
+## Information
+In this app it's possible to upload your NFT image to Pinata IPFS
+
+In this project I have learned about:
+* Uploading image files to IPFS file system
+* Using DaisyUI components and themes
+* Supabase (alternative to firebase) backend
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
