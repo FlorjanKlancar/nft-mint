@@ -2,9 +2,9 @@ import '../styles/globals.css'
 import AuthComponent from '../components/AuthComponent'
 import { UserProvider, useUser } from '@supabase/supabase-auth-helpers/react'
 import { supabaseClient } from '@supabase/supabase-auth-helpers/nextjs'
-import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }) {
   const { user } = useUser()
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
 function MyAppWithProvider({ Component, pageProps }) {
   return (
     <UserProvider supabaseClient={supabaseClient}>
-      <ToastContainer position="bottom-right" autoClose={2000} />
+      <Toaster />
       <MyApp Component={Component} pageProps={pageProps} />
     </UserProvider>
   )

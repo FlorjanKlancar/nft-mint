@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { nftModel } from '../../../model/nftModel'
 import ImagePrev from '../../../components/nft/ImagePrev'
@@ -11,27 +11,17 @@ function CreateNFT() {
     nftDescription: '',
     nftBlockchain: '',
     nftMetadata: '',
-    nftImage: {}
+    nftImage: ''
   })
 
   const handleChange = (e) =>
     setNftFormFields((prevState) => ({ ...prevState, [e.target.name]: e.target.value }))
 
-  /*   const getData = async () => {
-    const response = await axios.get('/api/nft')
-    setIpfsFiles(response.data.rows)
-    console.log(response)
-  } */
-
-  useEffect(() => {
-    //getData()
-  }, [])
-
   const submitHandler = async (e) => {
     e.preventDefault()
 
     const body = new FormData()
-    body.append('file', nftFormFields.nftImage as Blob)
+    body.append('file', nftFormFields.nftImage)
 
     const response = await axios.post('/api/nft/create', body)
     console.log(response)

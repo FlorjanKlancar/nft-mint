@@ -15,7 +15,7 @@ function NFTList({ dummyNFT }: NFTListProps) {
         >
           <div className="w-full items-center rounded-lg bg-gradient-to-br from-blue-500 via-gray-500 to-rose-400 p-1 md:w-full">
             <img
-              src={nft.nftImage.url}
+              src={nft.nftImage}
               className="h-72 w-full rounded-lg object-cover  xl:h-64"
               alt={nft.nftTitle}
             />

@@ -4,12 +4,19 @@ import NFTList from '../../components/nft/NFTList'
 import NFTListSkeleton from '../../components/nft/NFTListSkeleton'
 import { nftModel } from '../../model/nftModel'
 import CountUp from 'react-countup'
+import axios from 'axios'
 
 function NFT() {
   const [nfts, setNfts] = useState<nftModel[]>([])
 
+  const fetchNfts = async () => {
+    const response = await axios.get('/api/nft')
+
+    setNfts(response.data.data)
+  }
+
   useEffect(() => {
-    setTimeout(function () {
+    /*  setTimeout(function () {
       const dummyNFT = [
         {
           nftTitle: 'Opica 1',
@@ -66,8 +73,12 @@ function NFT() {
         }
       ]
       setNfts(dummyNFT)
-    }, 1000)
+    }, 1000) */
+
+    fetchNfts()
   }, [])
+
+  console.log('nfts', nfts)
 
   const pageTitle = (
     <h1>

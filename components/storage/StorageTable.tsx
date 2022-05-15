@@ -37,7 +37,7 @@ function StorageTable({
                     <td>
                       <div className="flex items-center space-x-3">
                         <div className="avatar">
-                          <div className="mask mask-squircle h-24 w-36 items-center justify-center">
+                          <div className="mask mask-squircle relative h-24 w-36 items-center justify-center">
                             <Image
                               src={`${ipfsURL}/${item.id}`}
                               alt="Avatar"
@@ -72,7 +72,7 @@ function StorageTable({
                     </td>
 
                     <th>
-                      <div className="dropdown dropdown-end">
+                      <div className="dropdown-end dropdown">
                         <label tabIndex={0} className="btn btn-ghost">
                           <DotsVerticalIcon className="h-5 w-5" />{' '}
                         </label>
@@ -103,17 +103,19 @@ function StorageTable({
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5}>No data</td>
+                  <td colSpan={5}>No files on IPFS</td>
                 </tr>
               )}
             </tbody>
-            <tfoot className="sticky bottom-0">
-              <tr>
-                <th colSpan={5} className="text-left 2xl:text-right">
-                  Uploaded files count: {data.length}
-                </th>
-              </tr>
-            </tfoot>
+            {data.length > 0 && (
+              <tfoot className="sticky bottom-0">
+                <tr>
+                  <th colSpan={5} className="text-left 2xl:text-right">
+                    Uploaded files count: {data.length}
+                  </th>
+                </tr>
+              </tfoot>
+            )}
           </table>
         </Scrollbars>
       </div>

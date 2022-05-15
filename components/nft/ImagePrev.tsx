@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { PhotographIcon } from '@heroicons/react/outline'
 import Image from 'next/image'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import toast from 'react-hot-toast'
 import { ClipboardCopyIcon } from '@heroicons/react/solid'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { useUser } from '@supabase/supabase-auth-helpers/react'
@@ -42,7 +42,7 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
     })
     setIsLoading(false)
 
-    toast.info('File uploaded to IPFS, hash: ' + result.data.pinataFile.IpfsHash)
+    toast.success('File uploaded to IPFS, hash: ' + result.data.pinataFile.IpfsHash)
 
     setFileIpfsHash(result.data.pinataFile.IpfsHash)
   }
@@ -108,7 +108,7 @@ const ImageUpload = ({ setNftFormFields }: ImagePrevProps) => {
         <CopyToClipboard text={fileIpfsHash}>
           <div
             className={'btn btn-outline truncate'}
-            onClick={() => toast.info('Copied to clipboard', { autoClose: 500 })}
+            onClick={() => toast.success('Copied to clipboard')}
           >
             {' '}
             <ClipboardCopyIcon className="w-6" /> {fileIpfsHash}
